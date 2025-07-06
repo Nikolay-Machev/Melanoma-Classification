@@ -17,8 +17,6 @@ This project implements a convolutional neural network to classify dermatoscopic
 This project uses the HAM10000 dataset:
 [HAM10000 on Harvard Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T)
 
-Download the images and metadata, and place them in your project folder as instructed in the notebook.
-
 ## Download the Trained Model
 
 The trained EfficientNetB3 model (~135 MB) is available here:
