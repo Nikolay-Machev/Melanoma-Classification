@@ -201,6 +201,12 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# Local HAM10000 data and trained checkpoints
+data/
+models/
+*.h5
+*.keras
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
