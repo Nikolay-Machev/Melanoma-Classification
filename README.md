@@ -1,5 +1,7 @@
 # Melanoma Classifier
 
+[![Tests](https://github.com/Nikolay-Machev/Melanoma-Classification/actions/workflows/tests.yml/badge.svg)](https://github.com/Nikolay-Machev/Melanoma-Classification/actions/workflows/tests.yml)
+
 I built a binary skin-lesion classifier with EfficientNetB3 and transfer learning to distinguish melanoma from other lesion classes in the HAM10000 dataset.
 
 **Research and educational use only — this project is not a medical device and must not be used for diagnosis.**
@@ -12,9 +14,22 @@ I built a binary skin-lesion classifier with EfficientNetB3 and transfer learnin
 2. **Model** — I use an ImageNet-pretrained EfficientNetB3 backbone with training-only augmentation, global average pooling, dropout, and a sigmoid output representing melanoma probability. The pipeline first trains the classification head and then fine-tunes the final backbone layers at a lower learning rate.
 3. **Evaluation and inference** — I report accuracy, ROC AUC, melanoma precision, and melanoma recall with melanoma explicitly encoded as the positive class. `predict.py` runs a single dermoscopic image through a saved model.
 
+## What this project demonstrates
+
+- Building a reproducible transfer-learning and inference pipeline
+- Preventing patient-proxy leakage through lesion-grouped validation
+- Separating exploratory results from evidence that would support clinical claims
+
 ## Original experiment
 
-My original notebook trained on all **10,015 HAM10000 images**: 1,113 melanoma and 8,902 non-melanoma images. It reported a peak validation accuracy of **85.26%** and a peak validation AUC of **0.888** across different epochs.
+My original notebook trained on all **10,015 HAM10000 images**: 1,113 melanoma and 8,902 non-melanoma images.
+
+These results document the original experiment; they are not results from the repository's newer leakage-resistant evaluation pipeline.
+
+| Evaluation | Result | Interpretation |
+|---|---:|---|
+| Original image-level validation split | 85.26% peak validation accuracy | Preliminary notebook result; repeated-lesion leakage was not controlled |
+| Original image-level validation split | 0.888 peak validation AUC | Preliminary result from a different epoch; not an external or lesion-held-out estimate |
 
 I treat these as preliminary results. The notebook used an image-level split, which may place different photographs of one lesion in both partitions, and its folder ordering made the reported precision and recall describe the non-melanoma class. The reproducible scripts in this repository correct both issues; their results should be reported separately after retraining.
 
@@ -99,3 +114,7 @@ The tests verify the melanoma label mapping and ensure that a `lesion_id` can ne
 ## License
 
 This project is licensed under the MIT License—see the [LICENSE](LICENSE) file for details.
+
+## Machine-learning portfolio
+
+Part of my machine-learning portfolio, spanning [models built from scratch](https://github.com/Nikolay-Machev/Tic-tac-toe-AI-Bot), computer vision, and [scientific machine learning](https://github.com/Nikolay-Machev/Qsar-Solubility-Predictor).
